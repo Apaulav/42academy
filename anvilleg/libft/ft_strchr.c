@@ -5,25 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/08 16:13:11 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/15 19:31:22 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:35:30 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:50 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {
 	int i;
 
 	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] == c)
-		{
-			return ((char *)s + i);
-		}
+	while (s[i] && s[i] != c)
 		i++;
-	}
 	if (s[i] == c)
 		return ((char *)s + i);
-	return (0);
+	return (NULL);
 }

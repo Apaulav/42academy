@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/04 21:04:21 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/11 18:03:31 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:33:46 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:39 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 size_t	ft_strlen(const char *s)
 {
-	unsigned int i;
+	int i;
 
 	i = 0;
-	while (s[i] != '\0')
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }

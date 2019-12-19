@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/17 20:41:28 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/19 01:20:51 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:35:49 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:53 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	size_t i;
-	size_t j;
+	size_t	i;
+	size_t	ssz;
 
 	i = 0;
-	j = 0;
-	if (dst == 0 || src == 0)
-	{
-		return (0);
-	}
-	while (src[i] != '\0')
-	{
-		if (dstsize != 0 && j < (dstsize - 1))
+	ssz = (!src ? 0 : ft_strlen(src));
+	if (dst == NULL)
+		return (ssz);
+	if (!dstsize)
+		return (ssz);
+	if (dst > src)
+		while (i < dstsize && src[i])
 		{
-			dst[j] = (char)src[j];
-			j++;
+			dst[i] = src[i];
+			i++;
 		}
-		i++;
-	}
-	if ((j > 0) || (*src == 0))
-		dst[j] = '\0';
-	return (i);
+	else
+		while (dstsize - 1 > 0 && src[i])
+		{
+			dst[dstsize - 1] = src[dstsize - 1];
+			dstsize--;
+		}
+	if (dstsize < ssz)
+		i--;
+	dst[i] = 0;
+	return (ssz);
 }

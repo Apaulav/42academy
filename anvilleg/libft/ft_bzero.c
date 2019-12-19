@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/25 09:41:21 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/25 11:52:46 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:32:52 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:29 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	char	*aux;
 	size_t	i;
+	char	*p;
 
-	aux = (char *)s;
+	p = (char *)s;
 	i = 0;
 	while (i < n)
 	{
-		aux[i] = '\0';
+		p[i] = 0;
 		i++;
 	}
 }

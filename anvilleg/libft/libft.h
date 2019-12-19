@@ -6,14 +6,21 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/11 09:04:10 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/12/06 00:42:13 by anvilleg         ###   ########.fr       */
+/*   Updated: 2019/12/18 22:32:41 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-#include <stdlib.h>
-#include <string.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
+
+typedef struct	s_list
+{
+	void			*content;
+	struct	s_list	*next;
+}				t_list;
 
 size_t	ft_strlen(const char *s);
 int		ft_isalpha(int c);
@@ -44,4 +51,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
+char	*ft_itoa(int n);
+char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
+char	*ft_strtrim(char const *s1, char const *set);
+char	**ft_split(char const *s, char c);
+t_list	*ft_lstnew(void const *content);
 #endif

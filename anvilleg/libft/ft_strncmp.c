@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/16 18:07:14 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/17 20:35:35 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:35:41 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:52 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t i;
+	size_t				i;
+	const unsigned char	*c1;
+	const unsigned char	*c2;
 
+	c1 = (const unsigned char *)s1;
+	c2 = (const unsigned char *)s2;
 	i = 0;
-	while (((s1[i] != '\0') || (s2[i] != '\0')) && (i <= (n - 1)))
+	if (n == 0)
+		return (0);
+	while (c1[i] && c2[i] && c1[i] == c2[i] && i < n - 1)
 	{
-		if (s1[i] == s2[i])
-		{
-			i++;
-		}
-		else
-		{
-			return ((unsigned char)s1[i] - s2[i]);
-		}
+		i++;
 	}
-	return (0);
+	return (c1[i] - c2[i]);
 }

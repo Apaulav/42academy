@@ -5,29 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/19 01:26:23 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/24 21:26:21 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:35:54 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:54 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
+size_t	ft_strlcat(char *dst, const char *src, size_t n)
 {
-	size_t i;
-	size_t j;
+	size_t	r;
+	size_t	i;
+	size_t	dstsize;
 
+	dstsize = ft_strlen(dst);
 	i = 0;
-	j = 0;
-	while ((i != dstsize) && dst[i] != '\0')
+	if (n <= dstsize)
+		r = (ft_strlen(src) + n);
+	else
 	{
-		i++;
+		r = (dstsize + ft_strlen(src));
+		while (i + dstsize + 1 < n && src[i])
+		{
+			dst[i + dstsize] = src[i];
+			i++;
+		}
+		dst[i + dstsize] = 0;
 	}
-	while (src[j] != '\0')
-	{
-		j++;
-	}
-	return (i + j);
+	return (r);
 }

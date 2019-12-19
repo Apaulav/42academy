@@ -5,35 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/24 20:14:30 by anvilleg          #+#    #+#             */
-/*   Updated: 2019/11/24 20:23:21 by anvilleg         ###   ########.fr       */
+/*   Created: 2019/12/16 09:36:02 by anvilleg          #+#    #+#             */
+/*   Updated: 2019/12/16 09:36:57 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int nbr;
-	int signo;
-	int i;
+#include "libft.h"
 
-	signo = 1;
-	nbr = 0;
+static int	ft_isspace(int c)
+{
+	if (c == '\n' || c == '\t' || c == '\v' || c == '\f' || c == '\r'
+			|| c == ' ')
+		return (1);
+	return (0);
+}
+
+static int	ft_returnvalue(int i, int numstart, int isneg, int r)
+{
+	if (i - numstart > 20)
+	{
+		if (!isneg)
+			return (-1);
+		return (0);
+	}
+	if (isneg)
+		return (-r);
+	return (r);
+}
+
+int			ft_atoi(const char *str)
+{
+	int r;
+	int i;
+	int isneg;
+	int	numstart;
+
 	i = 0;
-	while ((*str == '\t') || (*str == '\n') || (*str == '\v') || (*str == '\f')
-			|| (*str == '\r') || (*str == 32))
+	r = 0;
+	isneg = 0;
+	while (ft_isspace(str[i]))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		str++;
+		isneg = (str[i] == '-');
+		i++;
 	}
-	if ((*str == '-') || (*str == '+'))
+	numstart = i;
+	while (str[i] && ft_isdigit(str[i]))
 	{
-		if (*str == '-')
-			signo = signo * (-1);
-		str++;
+		r += str[i] - '0';
+		if (ft_isdigit(str[i + 1]))
+			r *= 10;
+		i++;
 	}
-	while ((*str >= '0') && (*str <= '9'))
-	{
-		nbr = (nbr * 10) + (*str - '0');
-		str++;
-	}
-	return (nbr * signo);
+	return (ft_returnvalue(i, numstart, isneg, r));
 }
