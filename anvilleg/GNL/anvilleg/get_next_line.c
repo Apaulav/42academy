@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/01/21 12:26:34 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/01/26 18:49:25 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@
 int get_next_line(int fd, char **line)
 {
 	ssize_t bytes;
-	
+	char buf[50];
+
+	line = 0;
 	if (fd == -1)
 	{
-		printf("Error al abrir");
+		printf("Error al abrir archivo.");
 	}
 	else
 	{
-		printf("fd: %d",fd);
-
-		bytes = read(fd, *line, 5);
+		bytes = read(fd, buf, 50);
 		close(fd);
-		if (bytes == 0)
+		if (bytes == 1 )
 			printf("Archivo vacio \n");
 		else 
-			printf("Caracteres %zd, %s \n", bytes, *line);
+			printf("Caracteres: %zd \nArchivo: \n%s \n", bytes, buf);
 	}
 	return 0;
 }
@@ -45,26 +45,7 @@ int main()
 	int fd;
 	char **line;	
 	//abro archivo como solo lectura (O_RDONLY) y me devuelve el fd
-	fd = open("./hola.txt", O_RDONLY);
-	printf("%d",fd);
-//	get_next_line(fd,line);
-	ssize_t bytes;
-	char buf[10];
-
-    if (fd == -1)
-    {
-        printf("Error al abrir");
-    }
-    else
-    {
-        printf("fd: %d \n",fd);
-
-        bytes = read(fd, buf, 5);
-        close(fd);
-        if (bytes == 0)
-            printf("Archivo vacio \n");
-        else
-            printf("Caracteres %zd, %s \n", bytes, buf);
-    }
-    return 0;
+	fd = open("./archivo.txt", O_RDONLY);
+	printf("FD: %d \n",fd);
+	get_next_line(fd, line);
 }
