@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/01/26 19:09:33 by pau              ###   ########.fr       */
+/*   Updated: 2020/01/26 19:47:25 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int get_next_line(int fd, char **line)
 	line = 0;
 	if (fd == -1)
 	{
-		printf("Error al abrir archivo.");
+		printf("Error al abrir archivo.\n");
+		return (fd);
 	}
 	else
 	{
