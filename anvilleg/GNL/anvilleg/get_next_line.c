@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/01/26 18:49:25 by pau              ###   ########.fr       */
+/*   Updated: 2020/01/26 19:09:33 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,17 @@ int get_next_line(int fd, char **line)
 	return 0;
 }
 
-int main()
+int main(int argc, char **argv)
 {
 //	char *str;
 
 //	if(get_next_line(1,&str) != -1)
 //		printf("%s", str);
 	int fd;
-	char **line;	
+	char **line;
+	
 	//abro archivo como solo lectura (O_RDONLY) y me devuelve el fd
-	fd = open("./archivo.txt", O_RDONLY);
+	fd = open(argv[1], O_RDONLY);
 	printf("FD: %d \n",fd);
 	get_next_line(fd, line);
 }
