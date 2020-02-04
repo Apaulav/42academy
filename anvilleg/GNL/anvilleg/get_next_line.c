@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/01/30 19:29:37 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:46:43 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@ int rfile(int fd, char *buf)
 {
 	ssize_t bytes;
 	bytes = read(fd, buf, BUFFER_SIZE);
-    if (bytes <= 1 )
+	if (bytes <= 1 )
     {
     	printf("Archivo vacio \n");
         return (0);
 	}
 	else
     {
+    	buf[bytes] = '\0';
         int j = 0;
         int h = 0;
         while (buf[h] != '\n' && h < bytes)
@@ -33,7 +34,6 @@ int rfile(int fd, char *buf)
 		}
         printf("Caracteres: %zd \nArchivo: \n%s", bytes, buf);
 	}
-	close(fd);
 	return (0);
 }
 
@@ -73,4 +73,8 @@ int main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	printf("FD: %d \n",fd);
 	get_next_line(fd, &line);
+	get_next_line(fd, &line);
+	get_next_line(fd, &line);
+	close(fd);
+
 }
