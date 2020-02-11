@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pau <marvin@42.fr>                         +#+  +:+       +#+        */
+/*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/09 18:47:46 by pau               #+#    #+#             */
-/*   Updated: 2020/02/09 22:12:52 by pau              ###   ########.fr       */
+/*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
+/*   Updated: 2020/02/11 08:06:42 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*ft_strdup(const char *s1)
 	int             length;
 	char    		*r;
 	int             i;
-	
+
 	length = ft_strlen(s1) + 1;
 	r = ft_calloc(length, sizeof(char));
 	i = 0;
@@ -73,7 +73,7 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	char    *m;
 	int     i;
 	int     j;
-	
+
 	if (s1 == 0 || s2 == 0)
 		return (0);
 	m = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
