@@ -6,13 +6,13 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/12 11:47:54 by pau              ###   ########.fr       */
+/*   Updated: 2020/02/13 12:06:55 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int rfile(int fd, char *buf,char *copybuf)
+int rfile(int fd, char *buf,char *copybuf, char **line)
 {
 	ssize_t bytes;
 	char *temp;
@@ -46,10 +46,13 @@ int rfile(int fd, char *buf,char *copybuf)
             if (copybuf[i] == '\n')
             {
 	            m = i+1;
+				line =(char **)malloc(sizeof(char)*(ft_strlen(temp)));
                 temp = ft_strdup(&copybuf[m]);
                 printf("temp: %s\n",temp);
+				//line = ft_strdup(copybuf);
+				//free(temp);
+				printf("Line: %s\n",line);
             }
-			//free(temp);
 			//return(1);
 		}
 	}
@@ -79,7 +82,7 @@ int get_next_line(int fd, char **line)
 		buf = (char *)malloc(sizeof(char)*(BUFFER_SIZE+1));
 		if (buf == NULL)
 			return (-1);
-		rfile(fd, buf,copybuf);
+		rfile(fd, buf,copybuf,line);
 		//Llamo a función asignar **line
 	}
 }

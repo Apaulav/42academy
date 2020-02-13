@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:34:17 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/11 08:05:05 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/02/13 11:51:04 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,4 @@ int		get_next_line(int fd, char **line);
 char    *ft_strdup(const char *s1);
 char    *ft_strjoin(char const *s1, char const *s2);
 char    *ft_strchr(const char *s, int c);
+size_t  ft_strlen(const char *s);
