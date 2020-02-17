@@ -6,31 +6,32 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/17 01:31:04 by pau              ###   ########.fr       */
+/*   Updated: 2020/02/17 08:36:36 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char resttemp(char *copybuf, int i, char *rest)
+char resttemp(char *copybuf, int i)
 {
 	int len;
 	int j;
+	char *rest;
 
 	len = i;
 	j = 0;
 	printf ("restcopy: %s\n", copybuf);
-	rest = (char *)malloc(sizeof(char) * i);
+	//rest = (char *)malloc(sizeof(char) * i);
 	printf("lenrest: %d",len);
 	printf("copybufrest: %s\n",copybuf[len]);
-	while (copybuf[len] != 'e' && copybuf[len] != '\0')
+	/*while (copybuf[len] != 'e' && copybuf[len] != '\0')
 	{
 		printf ("restcopy: %s\n", copybuf);
 		rest[j] = copybuf[len];
 		printf("rest: %s\n", rest);
 		j++;
 		len--;
-	}
+	}*/
 }
 
 int rfile(int fd, char *buf, char **line)
@@ -38,7 +39,6 @@ int rfile(int fd, char *buf, char **line)
 	ssize_t bytes;
 	static char *copybuf;
 	char *temp;
-	char *rest;
 	int m;
     int i;
 	int l;
@@ -51,7 +51,7 @@ int rfile(int fd, char *buf, char **line)
 	while (buf)
 	{
 		i = ft_strlen(copybuf);
-		resttemp(copybuf,i,rest);
+		resttemp(copybuf,i);
 		printf("longitud2 copybuf: %d\n", ft_strlen(copybuf));
 		bytes = read(fd, buf, BUFFER_SIZE);
 		if (bytes <= 0 )
