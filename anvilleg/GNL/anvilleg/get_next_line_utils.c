@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/11 08:06:42 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/02/16 11:33:43 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,4 +104,29 @@ char    *ft_strchr(const char *s, int c)
 	if (s[i] == c)
 		return ((char *)s + i);
 	return (NULL);
+}
+
+char    *ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char    *m;
+	size_t  i;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	m = (char *)malloc(sizeof(char) * (len + 1));
+	if (m == 0)
+		return (NULL);
+	if (ft_strlen(s) == 0)
+		return (ft_strdup(""));
+	if (start > ft_strlen(s))
+		return (ft_strdup(""));
+	while (i < len)
+	{
+		m[i] = s[start];
+		start++;
+		i++;
+	}
+	m[i] = '\0';
+	return (m);
 }
