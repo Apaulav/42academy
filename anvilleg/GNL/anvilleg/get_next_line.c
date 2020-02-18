@@ -6,57 +6,58 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/17 08:36:36 by pau              ###   ########.fr       */
+/*   Updated: 2020/02/18 05:18:33 by pau              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char resttemp(char *copybuf, int i)
+/*
+char clean(char *string)
 {
-	int len;
-	int j;
-	char *rest;
-
-	len = i;
-	j = 0;
-	printf ("restcopy: %s\n", copybuf);
-	//rest = (char *)malloc(sizeof(char) * i);
-	printf("lenrest: %d",len);
-	printf("copybufrest: %s\n",copybuf[len]);
-	/*while (copybuf[len] != 'e' && copybuf[len] != '\0')
+	if (string)
 	{
-		printf ("restcopy: %s\n", copybuf);
-		rest[j] = copybuf[len];
-		printf("rest: %s\n", rest);
-		j++;
-		len--;
-	}*/
-}
+		free(string);
+		string = NULL;
+	}
+	return (*string);
+}*/
 
 int rfile(int fd, char *buf, char **line)
 {
 	ssize_t bytes;
 	static char *copybuf;
 	char *temp;
-	int m;
+//	int m;
     int i;
-	int l;
-	int t;
+//	int l;
+//	int t;
 
 	if (!copybuf)
 		copybuf = ft_strdup("");
 //	printf("longitud copybuf: %d\n", ft_strlen(copybuf));
-	temp = ft_strdup("");
+	//temp = ft_strdup("");
+	i = 0;
 	while (buf)
 	{
-		i = ft_strlen(copybuf);
-		resttemp(copybuf,i);
-		printf("longitud2 copybuf: %d\n", ft_strlen(copybuf));
+		//i = ft_strlen(copybuf);
+		//printf("longitud2 copybuf: %d\n", ft_strlen(copybuf));
 		bytes = read(fd, buf, BUFFER_SIZE);
-		if (bytes <= 0 )
+		if (bytes < 0)
+		{	
+			free(buf);
+			buf = NULL;
+			free(copybuf);
+			copybuf = NULL;
+			return (-1);
+		}
+		else if (bytes == 0 )
     	{
 			free(buf);
+			buf = NULL;
+			free(copybuf);
+			copybuf = NULL;
+			//clean(buf);
+			//clean(copybuf);
 			printf("Archivo vacio \n");
         	return (0);
 		}
@@ -69,23 +70,22 @@ int rfile(int fd, char *buf, char **line)
 			printf("copia: %s\n",copybuf);
 			//printf("salto: %s\n",ft_strchr(copybuf,'\n'))    ;
 			//otra función comprobar \n
-            t = ft_strlen(temp);
-			printf("t: %d\n",t);
+            //t = ft_strlen(temp);
+			//printf("t: %d\n",t);
 			while (copybuf[i] != '\n' && copybuf[i])
 			{
-				temp[t] = copybuf[i];
+				//temp[t] = copybuf[i];
 				//printf("i: %c\n",copybuf[i]);
                 i++;
-				t++;
+				//t++;
             }
-			t++;
-			temp[t] = '\0';
-			printf("temp despues: %s\n",temp);
+			//t++;
+			//temp[t] = '\0';
             if (copybuf[i] == '\n')
             {
 
-	        	m = i+1;
-				printf("Salto de línea encontrado en la posicion: %d\n", m);
+	        	//m = i+1;
+				printf("Salto de línea encontrado en la posicion: %d\n", i);
 				//line = (char **)malloc(sizeof(char *)*m);
 				//if (line == NULL)
 				//	return (-1);
@@ -98,30 +98,34 @@ int rfile(int fd, char *buf, char **line)
 				//	l++;
 				//}
 
-				//temp = ft_strdup(&copybuf[m]);
+				temp = ft_strdup(&copybuf[i + 1]);
+				printf("temp despues: %s\n",temp);
 				//printf("temporal:%s\n", temp);
-				//line = ft_substr(copybuf,0,m);	
-				line = ft_strdup(temp);
+				*line = ft_substr(copybuf,0,i);	
+				//line = ft_strdup(temp);
 				//free(temp);
-				printf("Line: %s\n",line);
+				printf("Line: %s\n",*line);
 				//copybuf[i]='\0';
 				printf("copia sin \\n: %s\n",temp);
-				//break;
+				break;
 
-				return (1);
             }
 		}
 	}
-				//return (1);
+	//clean(copybuf);
+	free(copybuf);
+	copybuf = NULL;
+	//printf("Liberado copy %s\n",copybuf);
+	copybuf = ft_strdup(temp);
+	//printf("Liberado copy %s\n",copybuf);
+	return (1);
 }
 
 int get_next_line(int fd, char **line)
 {
 	//recived fd and create buffer(used for keep the text reading.)
 	char *buf;
-	//declarar varible estática
-	
-	line = NULL;
+		
 	if (fd == -1)
 	{
 		printf("Error al abrir archivo.\n");
