@@ -6,15 +6,15 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/24 12:19:34 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/02/24 22:59:46 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t  ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	if (!s)
@@ -24,16 +24,16 @@ size_t  ft_strlen(const char *s)
 	return (i);
 }
 
-void    *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	void    *r;
-	size_t 	i;
+	void	*r;
+	size_t	i;
 	char	*p;
 
 	r = malloc(size * count);
 	if (r == NULL)
 		return (NULL);
-	i= 0;
+	i = 0;
 	p = (char *)r;
 	while (i < (count * size))
 	{
@@ -45,9 +45,9 @@ void    *ft_calloc(size_t count, size_t size)
 
 char	*ft_strdup(const char *s1)
 {
-	int             length;
-	char    		*r;
-	int             i;
+	int		length;
+	char	*r;
+	int		i;
 
 	length = ft_strlen(s1) + 1;
 	r = ft_calloc(length, sizeof(char));
@@ -64,11 +64,11 @@ char	*ft_strdup(const char *s1)
 	return (r);
 }
 
-char    *ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
-	char    *m;
-	int     i;
-	int     j;
+	char	*m;
+	int		i;
+	int		j;
 
 	if (s1 == 0 || s2 == 0)
 		return (0);
@@ -87,13 +87,14 @@ char    *ft_strjoin(char *s1, char const *s2)
 		m[j++] = s2[i++];
 	}
 	m[j] = '\0';
+	free(s1);
 	return ((char *)m);
 }
 
-char    *ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char    *m;
-	size_t  i;
+	char	*m;
+	size_t	i;
 
 	if (!s)
 		return (NULL);
