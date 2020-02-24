@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/18 04:53:31 by pau              ###   ########.fr       */
+/*   Updated: 2020/02/24 12:19:34 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,29 @@ size_t  ft_strlen(const char *s)
 	int i;
 
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i])
 		i++;
 	return (i);
 }
 
-void    ft_bzero(void *s, size_t n)
-{
-	size_t  i;
-	char    *p;
-
-	p = (char *)s;
-	i = 0;
-	while (i < n)
-	{
-		p[i] = 0;
-		i++;
-	}
-}
-
 void    *ft_calloc(size_t count, size_t size)
 {
 	void    *r;
+	size_t 	i;
+	char	*p;
 
 	r = malloc(size * count);
 	if (r == NULL)
 		return (NULL);
-	ft_bzero(r, count * size);
+	i= 0;
+	p = (char *)r;
+	while (i < (count * size))
+	{
+		p[i] = 0;
+		i++;
+	}
 	return (r);
 }
 
@@ -68,7 +64,7 @@ char	*ft_strdup(const char *s1)
 	return (r);
 }
 
-char    *ft_strjoin(char const *s1, char const *s2)
+char    *ft_strjoin(char *s1, char const *s2)
 {
 	char    *m;
 	int     i;
@@ -94,18 +90,6 @@ char    *ft_strjoin(char const *s1, char const *s2)
 	return ((char *)m);
 }
 
-char    *ft_strchr(const char *s, int c)
-{
-	int i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	if (s[i] == c)
-		return ((char *)s + i);
-	return (NULL);
-}
-
 char    *ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char    *m;
@@ -121,7 +105,7 @@ char    *ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (start > ft_strlen(s))
 		return (ft_strdup(""));
-	while (i < len)
+	while (i < len && s[start])
 	{
 		m[i] = s[start];
 		start++;
