@@ -14,8 +14,24 @@
 
 static	void	clean(char *copybuf)
 {
-	free(copybuf);
-	copybuf = NULL;
+	if (!copybuf)
+	{
+		free(copybuf);
+		copybuf = NULL;
+	}
+}
+
+static	int		validate(ssize_t bytes, char *copybuf, int i, char **line)
+{
+	if (bytes == 0 && ft_strlen(copybuf) == 0 && i)
+	{
+		if (!(*line))
+			*line = ft_strdup("");
+		free(copybuf);
+		copybuf = NULL;
+		return (0);
+	}
+	return (1);
 }
 
 static int		jump(char *buf, char **copybuf, char **line, ssize_t bytes)
@@ -27,7 +43,8 @@ static int		jump(char *buf, char **copybuf, char **line, ssize_t bytes)
 	i = 0;
 	buf[bytes] = '\0';
 	aux = ft_strjoin(*copybuf, buf);
-	free(*copybuf);
+	if (!copybuf)
+		free(*copybuf);
 	*copybuf = aux;
 	while (*(*copybuf + i) != '\n' && *(*copybuf + i))
 		i++;
@@ -42,22 +59,9 @@ static int		jump(char *buf, char **copybuf, char **line, ssize_t bytes)
 		free(*copybuf);
 		*copybuf = ft_strdup(temp);
 		free(temp);
-		return (1);
+		return (validate(bytes, *copybuf, i, line) == 0 ? 0 : 1);
 	}
-	return (i);
-}
-
-static	int		validate(ssize_t bytes, char *copybuf, int j, char **line)
-{
-	if (bytes == 0 && ft_strlen(copybuf) == 0 && j)
-	{
-		if (!(*line))
-			*line = ft_strdup("");
-		free(copybuf);
-		copybuf = NULL;
-		return (0);
-	}
-	return (1);
+	return (i + 1);
 }
 
 static	int		rfile(int fd, char *buf, char **line)
@@ -78,6 +82,8 @@ static	int		rfile(int fd, char *buf, char **line)
 			j = jump(buf, &copybuf, line, bytes);
 			if (j == 1)
 				return (1);
+			if (j == 0)
+				return (0);
 		}
 		else if (bytes == 0)
 		{
@@ -104,5 +110,6 @@ if (fd == -1 || !line || BUFFER_SIZE <= 0)
 		return (-1);
 	gnl = rfile(fd, buf, line);
 	free(buf);
+	buf = NULL;
 	return (gnl);
 }
