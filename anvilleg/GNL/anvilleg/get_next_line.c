@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 11:25:26 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/27 23:05:19 by anvilleg         ###   ########.fr       */
+/*   Created: 2020/02/29 18:40:55 by anvilleg          #+#    #+#             */
+/*   Updated: 2020/02/29 19:22:00 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	void	clean(char *copybuf)
 {
-	if (!copybuf)
+	if (ft_strlen(copybuf) > 0)
 	{
 		free(copybuf);
 		copybuf = NULL;
@@ -43,14 +43,12 @@ static int		jump(char *buf, char **copybuf, char **line, ssize_t bytes)
 	i = 0;
 	buf[bytes] = '\0';
 	aux = ft_strjoin(*copybuf, buf);
-	if (!copybuf)
-		free(*copybuf);
+	clean(*copybuf);
 	*copybuf = aux;
 	while (*(*copybuf + i) != '\n' && *(*copybuf + i))
 		i++;
 	if (*(*copybuf + i) == '\n' || (*(*copybuf + i) == 0 && bytes == 0))
 	{
-		//temp = (*(*copybuf + i) == '\n') ? ft_strdup(&(*(*copybuf + i + 1)))
 		temp = (*(*copybuf + i) == '\n') ? ft_strdup((*copybuf + i + 1))
 			: ft_strdup("");
 		*line = ft_substr(*copybuf, 0, i);
@@ -67,11 +65,9 @@ static int		jump(char *buf, char **copybuf, char **line, ssize_t bytes)
 static	int		rfile(int fd, char *buf, char **line)
 {
 	ssize_t			bytes;
-	static char		*copybuf = NULL;
+	static char		*copybuf = "";
 	int				j;
 
-	if (!copybuf)
-		copybuf = ft_strdup("");
 	while (buf)
 	{
 		bytes = read(fd, buf, BUFFER_SIZE);
@@ -90,7 +86,7 @@ static	int		rfile(int fd, char *buf, char **line)
 			*line = ft_strdup("");
 			clean(copybuf);
 			return (0);
-		}
+		} 
 	}
 	return (validate(bytes, copybuf, j, line) ? 0 : 1);
 }
@@ -100,11 +96,8 @@ int				get_next_line(int fd, char **line)
 	char		*buf;
 	int			gnl;
 
-if (fd == -1 || !line || BUFFER_SIZE <= 0)
-	{
-		//printf("Error al abrir archivo.\n");
+	if (fd == -1 || !line || BUFFER_SIZE <= 0)
 		return (-1);
-	}
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (buf == NULL)
 		return (-1);
