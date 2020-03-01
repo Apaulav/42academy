@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/02/29 19:15:11 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/03/01 15:49:55 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*ft_calloc(size_t count, size_t size)
 		p[i] = 0;
 		i++;
 	}
-	return (r);
+	return (p);
 }
 
 char	*ft_strdup(const char *s1)
@@ -59,7 +59,7 @@ char	*ft_strdup(const char *s1)
 			r[i] = s1[i];
 			i++;
 		}
-		r[i] = 0;
+		r[i] = '\0';
 	}
 	return (r);
 }
