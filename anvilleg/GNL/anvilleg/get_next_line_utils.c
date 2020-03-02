@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/03/01 15:49:55 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/03/02 23:18:51 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,6 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*r;
-	size_t	i;
-	char	*p;
-
-	r = malloc(size * count);
-	if (r == NULL)
-		return (NULL);
-	i = 0;
-	p = (char *)r;
-	while (i < (count * size))
-	{
-		p[i] = 0;
-		i++;
-	}
-	return (p);
-}
-
 char	*ft_strdup(const char *s1)
 {
 	int		length;
@@ -50,7 +31,7 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	length = ft_strlen(s1) + 1;
-	r = ft_calloc(length, sizeof(char));
+	r = (char*)malloc(sizeof(char) * ft_strlen(s1) + 1);
 	i = 0;
 	if (r != NULL)
 	{
