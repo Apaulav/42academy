@@ -6,7 +6,7 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:34:17 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/03/03 09:01:13 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/02/25 10:55:13 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ char	*ft_strdup(const char *s1);
 char	*ft_strjoin(char *s1, char const *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
+
 #endif
