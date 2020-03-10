@@ -6,11 +6,11 @@
 /*   By: anvilleg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 08:05:38 by anvilleg          #+#    #+#             */
-/*   Updated: 2020/03/09 03:16:03 by anvilleg         ###   ########.fr       */
+/*   Updated: 2020/03/09 12:26:33 by anvilleg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char		*ft_strchr(const char *s, int c)
 {
